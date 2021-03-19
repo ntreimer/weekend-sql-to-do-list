@@ -14,11 +14,13 @@ app.use( express.static('server/public') );
 const port = 5000;
 
 // modules
-const example = require('./modules/pool');
+const toDo = require('./modules/routes/to-do-routes');
 
-// app listen
+// server spin-up and routes
 app.listen(port, ()=>{
     console.log('server is up on:', port);
 })
+
+app.use('/toDo', toDo);
 
 

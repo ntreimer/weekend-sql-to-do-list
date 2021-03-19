@@ -1,8 +1,8 @@
 ### PHASE 1 INITIALIZATION
-- [ ] Create files/folders
-- [ ] Source files into index
-- [ ] Spin up server
-- [ ] Create postico server called "weekend-to-do-app"
+- [x] Create files/folders
+- [x] Source files into index
+- [x] Spin up server
+- [x] Create postico server called "weekend-to-do-app"
 - [ ] Make database.sql that includes all CREATE TABLE queries
 
 ### PHASE 2 SKELETON COMMUNICATION
