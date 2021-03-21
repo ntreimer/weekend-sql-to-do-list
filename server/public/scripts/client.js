@@ -26,8 +26,8 @@ function displayTasks(array) {
             <tr data-id="${element.id}" data-completion="${element.complete}" >
                 <td>${completeness}</td>
                 <td class="${background}">${element.task}</td>
-                <td><button class="completeBtn">Complete task</button></td>
-                <td><button class="deleteBtn">Delete task</button></td>
+                <td><button class="completeBtn btn btn-success">Complete task</button></td>
+                <td><button class="deleteBtn btn btn-danger">Delete task</button></td>
             </tr>
         `);
     }
@@ -49,6 +49,7 @@ function newTask() {
         task: $('#task-input').val(),
         complete: false
     }
+    $('#task-input').val('');
     $.ajax({
         method: 'POST',
         url: '/toDo',

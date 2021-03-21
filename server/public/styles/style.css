@@ -1,8 +1,9 @@
 body {
-    top: 5em;
     background-color: rgb(230, 203, 255);
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: large;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 #create-area {
