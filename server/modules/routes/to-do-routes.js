@@ -8,7 +8,10 @@ const pool = require('../pool');
 
 // GET 
 router.get('/', (req, res)=>{
-    let queryText = `SELECT * FROM "checklist"`;
+    let queryText = `
+    SELECT * FROM "checklist"
+    ORDER BY id;
+    `;
     pool.query(queryText).then((results)=>{
         res.send(results.rows);
     }).catch((err)=>{
@@ -31,9 +34,8 @@ router.post('/', (req, res)=>{
 
 // PUT
 router.put('/:id', (req, res)=>{
-    console.log('in PUT:', req.params);
     let queryText = `UPDATE "checklist" SET "complete"=true WHERE "id"=$1`;
-    if (req.body.complete === true) {
+    if (req.body.complete === 'true') {
         queryText = `UPDATE "checklist" SET "complete"=false WHERE "id"=$1`;
     }
     pool.query(queryText, [req.params.id]).then((results)=>{

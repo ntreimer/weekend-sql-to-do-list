@@ -17,6 +17,7 @@ function displayTasks(array) {
     $('#new-tasks-here').empty();
     for (let i = 0; i < array.length; i++) {
         const element = array[i];
+        console.log(element);
         let completeness = '&#9744;';
         let background = 'incomplete-task';
             if (element.complete === true) {
