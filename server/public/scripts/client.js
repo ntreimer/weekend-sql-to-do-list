@@ -3,8 +3,12 @@ console.log('js');
 $(document).ready(onReady);
 
 function onReady() {
-    console.log('jQuery');
+    // run on start
     getTasks();
+    // click handlers
+    $('#submit-btn').on('click', newTask);
+    // dynamic click handlers
+
 }// end onReady
 
 function displayTasks(array) {
@@ -17,10 +21,12 @@ function displayTasks(array) {
                 completeness = '&#9745;';
             }
         $('#new-tasks-here').append(`
-            <td>${completeness}</td>
-            <td>${element.task}</td>
-            <td><button class="completeBtn">Complete task</button></td>
-            <td><button class="deleteBtn">Delete task</button></td>
+            <tr data-id="${element.id}">
+                <td>${completeness}</td>
+                <td>${element.task}</td>
+                <td><button class="completeBtn">Complete task</button></td>
+                <td><button class="deleteBtn">Delete task</button></td>
+            </tr>
         `);
     }
 }// end displayTasks
@@ -37,3 +43,21 @@ function getTasks() {
         console.log(err);
     })// end ajax
 }// end getTasks
+
+function newTask() {
+    
+    let objectToSend = {
+        task: $('#task-input').val(),
+        complete: false
+    }
+    $.ajax({
+        method: 'POST',
+        url: '/toDo',
+        data: objectToSend
+    }).then(function(response){
+        console.log('back from POST with:', response);
+        getTasks(response);
+    }).catch(function(err){
+        console.log('error!', err);
+    })
+}// end newTask

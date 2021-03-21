@@ -15,10 +15,19 @@ router.get('/', (req, res)=>{
         console.log(err);
         res.sendStatus(500);
     })
-})
-// end GET
+})// end GET
+
 
 // POST
+router.post('/', (req, res)=>{
+    let queryText = `INSERT INTO "checklist" (task, complete) VALUES ($1, $2);`
+    pool.query(queryText, [req.body.task, req.body.complete]).then((results)=>{
+        res.sendStatus(201);
+    }).catch((err)=>{
+        console.log(err);
+        res.sendStatus(500);
+    })
+})// end POST
 
 // PUT
 
