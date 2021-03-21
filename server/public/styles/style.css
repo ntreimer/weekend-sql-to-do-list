@@ -1,3 +1,7 @@
 body {
     background-color: rgb(230, 203, 255);
 }
+
+#create-area {
+    margin-bottom: 5em;
+}

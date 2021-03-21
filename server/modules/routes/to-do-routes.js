@@ -8,8 +8,13 @@ const pool = require('../pool');
 
 // GET 
 router.get('/', (req, res)=>{
-    console.log('in /toDo GET:', res);
-    res.send('tweet');
+    let queryText = `SELECT * FROM "checklist"`;
+    pool.query(queryText).then((results)=>{
+        res.send(results.rows);
+    }).catch((err)=>{
+        console.log(err);
+        res.sendStatus(500);
+    })
 })
 // end GET
 
