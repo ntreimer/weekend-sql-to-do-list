@@ -30,6 +30,20 @@ router.post('/', (req, res)=>{
 })// end POST
 
 // PUT
+router.put('/:id', (req, res)=>{
+    console.log('in PUT:', req.params);
+    let queryText = `UPDATE "checklist" SET "complete"=true WHERE "id"=$1`;
+    if (req.body.complete === true) {
+        queryText = `UPDATE "checklist" SET "complete"=false WHERE "id"=$1`;
+    }
+    pool.query(queryText, [req.params.id]).then((results)=>{
+        console.log(results);
+        res.sendStatus(200);
+    }).catch((err)=>{
+        console.log(err);
+        res.sendStatus(500);
+    })
+})
 
 // DELETE
 

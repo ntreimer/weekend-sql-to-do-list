@@ -7,6 +7,7 @@ function onReady() {
     getTasks();
     // click handlers
     $('#submit-btn').on('click', newTask);
+    $(document).on('click', '.completeBtn', updateCompletion);
     // dynamic click handlers
 
 }// end onReady
@@ -17,11 +18,13 @@ function displayTasks(array) {
     for (let i = 0; i < array.length; i++) {
         const element = array[i];
         let completeness = '&#9744;';
+        let background = 'incomplete-task';
             if (element.complete === true) {
                 completeness = '&#9745;';
+                background = 'complete-task'
             }
         $('#new-tasks-here').append(`
-            <tr data-id="${element.id}">
+            <tr data-id="${element.id}" data-completion="${element.complete}" class="${background}">
                 <td>${completeness}</td>
                 <td>${element.task}</td>
                 <td><button class="completeBtn">Complete task</button></td>
@@ -61,3 +64,21 @@ function newTask() {
         console.log('error!', err);
     })
 }// end newTask
+
+function updateCompletion() {
+    let myID = $(this).parent().parent().data('id');
+    let objectToSend = {
+        complete: $(this).parent().parent().data('completion')
+    }
+    console.log('object to send', objectToSend);
+    $.ajax({
+        method: 'PUT',
+        url: `/toDo/${myID}`,
+        data: objectToSend
+    }).then(function(response){
+        console.log(response);
+        getTasks();
+    }).catch(function(err){
+        console.log(err);
+    })
+}// end updateCompletion

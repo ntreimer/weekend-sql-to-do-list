@@ -5,3 +5,7 @@ body {
 #create-area {
     margin-bottom: 5em;
 }
+
+.complete-task {
+    background-color: green;
+}
