@@ -41,3 +41,7 @@ header {
     text-align: center;
     margin-bottom: 5em;
 }
+
+#task-input {
+    margin-bottom: 1em;
+}
