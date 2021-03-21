@@ -13,11 +13,9 @@ function onReady() {
 }// end onReady
 
 function displayTasks(array) {
-    console.log('in displayTasks:', array);
     $('#new-tasks-here').empty();
     for (let i = 0; i < array.length; i++) {
         const element = array[i];
-        console.log(element);
         let completeness = '&#9744;';
         let background = 'incomplete-task';
             if (element.complete === true) {
@@ -25,9 +23,9 @@ function displayTasks(array) {
                 background = 'complete-task'
             }
         $('#new-tasks-here').append(`
-            <tr data-id="${element.id}" data-completion="${element.complete}" class="${background}">
+            <tr data-id="${element.id}" data-completion="${element.complete}" >
                 <td>${completeness}</td>
-                <td>${element.task}</td>
+                <td class="${background}">${element.task}</td>
                 <td><button class="completeBtn">Complete task</button></td>
                 <td><button class="deleteBtn">Delete task</button></td>
             </tr>
@@ -36,12 +34,10 @@ function displayTasks(array) {
 }// end displayTasks
 
 function getTasks() {
-    console.log('in getTasks');
     $.ajax({
         method: 'GET',
         url: '/toDo'
     }).then(function(response){
-        console.log('back from toDo GET with:', response);
         displayTasks(response);
     }).catch(function(err){
         console.log(err);
@@ -49,7 +45,6 @@ function getTasks() {
 }// end getTasks
 
 function newTask() {
-    
     let objectToSend = {
         task: $('#task-input').val(),
         complete: false
@@ -84,7 +79,6 @@ function updateCompletion() {
     let objectToSend = {
         complete: $(this).parent().parent().data('completion')
     }
-    console.log('object to send', objectToSend);
     $.ajax({
         method: 'PUT',
         url: `/toDo/${myID}`,
