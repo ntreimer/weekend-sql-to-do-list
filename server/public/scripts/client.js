@@ -7,9 +7,9 @@ function onReady() {
     getTasks();
     // click handlers
     $('#submit-btn').on('click', newTask);
-    $(document).on('click', '.completeBtn', updateCompletion);
     // dynamic click handlers
-
+    $(document).on('click', '.completeBtn', updateCompletion);
+    $(document).on('click', '.deleteBtn', removeTask);
 }// end onReady
 
 function displayTasks(array) {
@@ -65,6 +65,19 @@ function newTask() {
         console.log('error!', err);
     })
 }// end newTask
+
+function removeTask() {
+    let myID = $(this).parent().parent().data('id');
+    $.ajax({
+        method: 'DELETE',
+        url: `/toDo/${myID}`
+    }).then(function(response){
+        console.log(response);
+        getTasks();
+    }).catch(function(err){
+        console.log(err);
+    })
+}// end removeTask
 
 function updateCompletion() {
     let myID = $(this).parent().parent().data('id');

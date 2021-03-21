@@ -1,5 +1,6 @@
 // grab express and pg-pool
 
+const { response } = require('express');
 const express = require('express');
 const router = express.Router();
 const pool = require('../pool');
@@ -45,9 +46,20 @@ router.put('/:id', (req, res)=>{
         console.log(err);
         res.sendStatus(500);
     })
-})
+})// end PUT
 
 // DELETE
+router.delete('/:id', (req, res)=>{
+    console.log('in DELETE:', req.params);
+    let queryText = `DELETE FROM "checklist" WHERE "id"=$1`
+    pool.query(queryText, [req.params.id]).then((response)=>{
+        console.log(response);
+        res.sendStatus(200);
+    }).catch((err)=>{
+        console.log(err);
+        res.sendStatus(500);
+    })
+})
 
 // export routes
 module.exports = router;
