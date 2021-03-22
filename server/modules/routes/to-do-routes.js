@@ -11,7 +11,7 @@ const pool = require('../pool');
 router.get('/', (req, res)=>{
     let queryText = `
     SELECT * FROM "checklist"
-    ORDER BY id;
+    ORDER BY id DESC;
     `;
     pool.query(queryText).then((results)=>{
         res.send(results.rows);
